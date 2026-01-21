@@ -1,0 +1,32 @@
+name: Deploy Airflow DAGs
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'airflow-dags/**' # Só dispara se mexer nas DAGs
+
+env:
+  BUCKET_COMPOSER: "us-central1-airflow-rrda-88c30861-bucket" # SEU BUCKET AQUI
+
+jobs:
+  deploy-dags:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout do Código
+        uses: actions/checkout@v3
+
+      - name: Autenticação Google Cloud
+        uses: google-github-actions/auth@v1
+        with:
+          credentials_json: '${{ secrets.GCP_SA_KEY }}'
+
+      - name: Setup GCloud SDK
+        uses: google-github-actions/setup-gcloud@v1
+
+      - name: Deploy DEV DAGs
+        # Copia tudo da pasta local airflow-dags/dev para a pasta dags/ do bucket
+        run: |
+          gcloud storage cp airflow-dags/dev/*.py gs://${{ env.BUCKET_COMPOSER }}/dags/
+          echo "Deploy de DEV concluído!"
