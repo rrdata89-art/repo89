@@ -28,7 +28,7 @@ default_args = {
 with DAG(
     'pipeline_api_bitcoin_v3',
     default_args=default_args,
-    description='Pipeline V3: Raw -> Trusted -> Refined',
+    description='Pipeline V3: ATUALIZADO PELO GITHUB',
     schedule_interval='0 9 * * *',
     start_date=days_ago(1),
     catchup=False,
