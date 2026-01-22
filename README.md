@@ -52,7 +52,7 @@ rrdata89-datalake_02/
 │       └── rf_tb_bitcoin.sql              # Procedure REFINED (Análise)
 └── README.md                               # Este arquivo
 ```
-
+----
 ---
 
 ## 🔄 Fluxo de Dados
